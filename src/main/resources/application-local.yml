@@ -1,0 +1,13 @@
+spring:
+  r2dbc:
+    url: r2dbc:mysql://43.201.254.36:3306/user_db?useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=Asia/Seoul
+    username: user_app
+    password: ssemchelin01
+    pool:
+      max-size: 100
+      validation-query: SELECT 1
+
+
+logging:
+  level:
+    org.springframework.r2dbc.core: debug
