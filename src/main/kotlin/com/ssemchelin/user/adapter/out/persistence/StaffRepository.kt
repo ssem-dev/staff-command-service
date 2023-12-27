@@ -1,8 +1,13 @@
 package com.ssemchelin.user.adapter.out.persistence
 
+import com.ssemchelin.user.application.port.out.FindUsersOutputPort
 import com.ssemchelin.user.domain.Staff
-import org.springframework.data.r2dbc.repository.R2dbcRepository
 import org.springframework.stereotype.Repository
+import reactor.core.publisher.Flux
 
 @Repository
-interface StaffRepository : R2dbcRepository<Staff, Long>
+class StaffRepository(val staffR2dbcRepository: StaffR2dbcRepository) : FindUsersOutputPort {
+    override fun findAllUsers(): Flux<Staff> {
+        return staffR2dbcRepository.findAll()
+    }
+}
