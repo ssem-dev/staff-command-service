@@ -23,7 +23,7 @@ dependencies {
     implementation("org.springframework.kafka:spring-kafka")
 
     implementation("org.springframework.boot:spring-boot-starter-data-r2dbc")
-    implementation("com.github.jasync-sql:jasync-r2dbc-mysql:2.0.8")
+    implementation("com.github.jasync-sql:jasync-r2dbc-mysql:2.2.4")
 
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
     implementation("io.projectreactor.kotlin:reactor-kotlin-extensions")
