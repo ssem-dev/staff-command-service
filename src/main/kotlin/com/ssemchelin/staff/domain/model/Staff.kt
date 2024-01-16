@@ -1,4 +1,4 @@
-package com.ssemchelin.staff.domain
+package com.ssemchelin.staff.domain.model
 
 import org.springframework.data.annotation.*
 import org.springframework.data.relational.core.mapping.Table
@@ -21,5 +21,4 @@ data class Staff(
         @Transient
         val staffSocial: StaffSocial? = null
 ) {
-
 }

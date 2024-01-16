@@ -1,7 +1,7 @@
 package com.ssemchelin.staff.adapter.`in`.web
 
 import com.ssemchelin.staff.application.usecase.FindStaffsUseCase
-import com.ssemchelin.staff.domain.Staff
+import com.ssemchelin.staff.domain.model.Staff
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
