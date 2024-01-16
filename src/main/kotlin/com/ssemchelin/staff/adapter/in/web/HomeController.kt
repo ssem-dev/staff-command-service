@@ -1,4 +1,4 @@
-package com.ssemchelin.user.adapter.`in`.web
+package com.ssemchelin.staff.adapter.`in`.web
 
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.RestController

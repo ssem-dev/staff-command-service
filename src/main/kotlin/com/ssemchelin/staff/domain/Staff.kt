@@ -1,4 +1,4 @@
-package com.ssemchelin.user.domain
+package com.ssemchelin.staff.domain
 
 import org.springframework.data.annotation.*
 import org.springframework.data.relational.core.mapping.Table
@@ -17,7 +17,9 @@ data class Staff(
         @LastModifiedBy
         val updateBy: Long? = null,
         @LastModifiedDate
-        val updateAt: LocalDateTime = LocalDateTime.now()
+        val updateAt: LocalDateTime = LocalDateTime.now(),
+        @Transient
+        val staffSocial: StaffSocial? = null
 ) {
 
 }

@@ -1,4 +1,4 @@
-package com.ssemchelin.user
+package com.ssemchelin.staff
 
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
