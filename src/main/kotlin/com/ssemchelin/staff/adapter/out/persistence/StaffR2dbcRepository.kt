@@ -7,11 +7,17 @@ import reactor.core.publisher.Flux
 
 interface StaffR2dbcRepository : R2dbcRepository<Staff, Long> {
     @Query("""
-        select 
-            s.*,
-            ss.*
-        from staff s 
-        inner join staff_social ss 
-    """)
+    select 
+        s.id as staffId,
+        s.email,
+        s.nick_name as nickName,
+        ss.id as staffSocialId,
+        ss.social_key as socialKey,
+        ss.type,
+        ss.staff_id as staffId
+    from staff s 
+    left outer join staff_social ss on s.id = ss.staff_id
+"""
+    )
     override fun findAll(): Flux<Staff>
 }

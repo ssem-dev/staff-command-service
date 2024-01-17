@@ -2,6 +2,7 @@ package com.ssemchelin.staff.config
 
 import com.ssemchelin.staff.domain.converter.StaffReadConverter
 import io.r2dbc.spi.ConnectionFactory
+import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.core.io.ClassPathResource
@@ -17,11 +18,11 @@ import org.springframework.r2dbc.core.DatabaseClient
 @Configuration
 @EnableR2dbcAuditing
 @EnableR2dbcRepositories
-class DatabaseConfig {
+class DatabaseConfig @Autowired constructor(private val staffReadConverter: StaffReadConverter) {
 
     @Bean
-    fun inititalizer(connectionFactory: ConnectionFactory): ConnectionFactoryInitializer {
-        val initializer = ConnectionFactoryInitializer();
+    fun initializer(connectionFactory: ConnectionFactory): ConnectionFactoryInitializer {
+        val initializer = ConnectionFactoryInitializer()
         initializer.setConnectionFactory(connectionFactory)
         val populator = ResourceDatabasePopulator(ClassPathResource("sql/schema.sql"))
         initializer.setDatabasePopulator(populator)
@@ -32,15 +33,16 @@ class DatabaseConfig {
     @Bean
     fun r2dbcCustomConversions(databaseClient: DatabaseClient): R2dbcCustomConversions {
         val dialect = DialectResolver.getDialect(databaseClient.connectionFactory)
-        val converters = arrayListOf(dialect.converters)
-        converters.addAll(listOf(R2dbcCustomConversions.STORE_CONVERTERS))
+        val converters = mutableListOf<Any>()
+        converters.addAll(dialect.converters)
+        converters.addAll(R2dbcCustomConversions.STORE_CONVERTERS)
+        converters.add(staffReadConverter)
 
-        return R2dbcCustomConversions(CustomConversions.StoreConversions.of(dialect.simpleTypeHolder, converters), geetCustomConverters())
-    }
-
-    private fun geetCustomConverters(): List<Any> {
-        return listOf(StaffReadConverter());
+        return R2dbcCustomConversions(
+            CustomConversions.StoreConversions.of(
+                dialect.simpleTypeHolder,
+                converters
+            ), listOf<Any>()
+        )
     }
 }
-
-

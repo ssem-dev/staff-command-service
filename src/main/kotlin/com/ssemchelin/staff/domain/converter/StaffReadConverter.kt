@@ -6,11 +6,14 @@ import com.ssemchelin.staff.domain.model.StaffSocial
 import io.r2dbc.spi.Row
 import org.springframework.core.convert.converter.Converter
 import org.springframework.data.convert.ReadingConverter
+import org.springframework.stereotype.Component
 
+@Component
 @ReadingConverter
 class StaffReadConverter : Converter<Row, Staff> {
     override fun convert(source: Row): Staff {
-        val staffSocial: StaffSocial = StaffSocial(
+        println("convert 실행")
+        val staffSocial = StaffSocial(
                 id = source.get("staffSocialId") as Long,
                 socialKey = source.get("socialKey") as String,
                 type = SocialType.GOOGLE,
@@ -18,7 +21,7 @@ class StaffReadConverter : Converter<Row, Staff> {
         )
 
         return Staff(
-                id = source.get("staffId") as Long,
+            id = source.get("id") as Long,
                 email = source.get("email") as String,
                 nickName = source.get("nickName") as String,
                 staffSocial = staffSocial
